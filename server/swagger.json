@@ -1,0 +1,206 @@
+{
+	"swagger": "2.0",
+
+	"info": {
+		"version": "1.0.0",
+		"title": "Numerical",
+		"description": "Numerical API",
+		"termOfService": "http://swagger.io/terms/"
+	},
+
+	"securityDefinitions": {
+		"AuthToken": {
+			"type": "apiKey",
+			"name": "Authorization",
+			"in": "header",
+			"description": "The token for authentication"
+		}
+	},
+	"security": [
+		{
+			"AuthToken": []
+		}
+	],
+
+	"host": "localhost:3500",
+	"basePath": "/",
+	"schemes": ["http"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"],
+
+	"paths": {
+		"/bisection": {
+			"get": {
+				"tags": ["bisection"],
+				"summary": "Get bisection",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Bisection"
+						}
+					}
+				}
+			}
+		},
+		"/onepoint": {
+			"get": {
+				"tags": ["one-point"],
+				"summary": "Get one point",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/OnePoint"
+						}
+					}
+				}
+			}
+		},
+		"/integrate": {
+			"get": {
+				"tags": ["integrate"],
+				"summary": "Get integrate",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Integrate"
+						}
+					}
+				}
+			}
+		},
+		"/diff": {
+			"get": {
+				"tags": ["differencese"],
+				"summary": "Get differencese",
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/Differencese"
+						}
+					}
+				}
+			}
+		},
+		"/auth": {
+			"post": {
+				"tags": ["Auth"],
+				"description": "Login with user in system",
+				"parameters": [
+					{
+						"name": "user",
+						"in": "body",
+						"description": "User that we want to login",
+						"schema": {
+							"$ref": "#/definitions/Auth"
+						}
+					}
+				],
+				"produces": ["application/json"],
+				"responses": {
+					"200": {
+						"description": "New user is created",
+						"schema": {
+							"$ref": "#/definitions/Auth"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"Bisection": {
+			"required": ["expr", "xl", "xr"],
+			"properties": {
+				"expr": {
+					"type": "string"
+				},
+				"xl": {
+					"type": "number"
+				},
+				"xr": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"expr": "x^4-13",
+				"xl": "1.5",
+				"xr": "2"
+			}
+		},
+		"OnePoint": {
+			"type": "object",
+			"required": ["expr", "x"],
+			"properties": {
+				"expr": {
+					"type": "string"
+				},
+				"x": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"expr": "1 + (1/x)",
+				"x": "2"
+			}
+		},
+		"Integrate": {
+			"type": "object",
+			"required": ["expr", "a", "b"],
+			"properties": {
+				"expr": {
+					"type": "string"
+				},
+				"a": {
+					"type": "number"
+				},
+				"b": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"expr": "4x^5 -3x^4 + x^3 - 6x + 2",
+				"a": "2",
+				"b": "8"
+			}
+		},
+		"Differencese": {
+			"type": "object",
+			"required": ["expr", "x", "h"],
+			"properties": {
+				"expr": {
+					"type": "string"
+				},
+				"x": {
+					"type": "number"
+				},
+				"h": {
+					"type": "number"
+				}
+			},
+			"example": {
+				"expr": "e^x",
+				"x": "2",
+				"h": "0.25"
+			}
+		},
+		"Auth": {
+			"required": ["username", "password"],
+			"properties": {
+				"username": {
+					"type": "string"
+				},
+				"password": {
+					"type": "string"
+				}
+			},
+			"example": {
+				"username": "pepsi",
+				"password": "A1234"
+			}
+		}
+	}
+}
