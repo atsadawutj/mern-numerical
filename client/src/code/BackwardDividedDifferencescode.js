@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, TextField, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material';
 import { firstBackwardH, secondBackwardH, firstBackwardH2, secondBackwardH2 } from '../utils/backwardDividedDifference';
 import axios from "axios"
-import Plot from 'react-plotly.js';
+import Plot from 'react-plotly.js'
 const math = require('mathjs')
 
 function BackwardDividedDifferencescode() {

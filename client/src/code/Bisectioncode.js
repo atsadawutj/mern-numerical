@@ -27,15 +27,11 @@ function BisectionCode() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [showGraph, setShowGraph] = useState(false)
   const [data, setData] = useState([])
-  const config = { 
-    headers: {
-      'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlcHNpIiwiaWF0IjoxNjUzNTQxOTQzLCJleHAiOjE2ODUwNzc5NDN9.t_ENYPHSnkLj18auCs_2UV9hauWyvMGcMBRAh7-Eqbg`
-    }
-  }
 
   useEffect(() => {
+    const config = { 'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlcHNpIiwiaWF0IjoxNjUzNTQxOTQzLCJleHAiOjE2ODUwNzc5NDN9.t_ENYPHSnkLj18auCs_2UV9hauWyvMGcMBRAh7-Eqbg` }
     function getData() {
-      axios.get('http://localhost:3500/bisection', config)
+      axios.get('http://localhost:3500/bisection', {headers: config})
         .then(response => {
           setData(response.data)
           console.log(response.data)
