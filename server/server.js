@@ -5,7 +5,6 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const connectDB = require('./dbConn')
 const verifyJWT = require('./middleware/verifyJWT')
-require('dotenv').config()
 const swaggerUi = require('swagger-ui-express'),
     swaggerDocument = require('./swagger.json')
 connectDB()     
