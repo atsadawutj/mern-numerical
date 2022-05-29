@@ -4,3 +4,4 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 window.URL.createObjectURL = function() {};
+window.HTMLCanvasElement.prototype.getContext = () => {}

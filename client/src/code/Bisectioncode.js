@@ -27,22 +27,24 @@ function BisectionCode() {
   const [showAnswer, setShowAnswer] = useState(false);
   const [showGraph, setShowGraph] = useState(false)
   const [data, setData] = useState([])
-
   useEffect(() => {
     const config = { 'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlcHNpIiwiaWF0IjoxNjUzNTQxOTQzLCJleHAiOjE2ODUwNzc5NDN9.t_ENYPHSnkLj18auCs_2UV9hauWyvMGcMBRAh7-Eqbg` }
-    function getData() {
-      axios.get('http://localhost:3500/bisection', {headers: config})
-        .then(response => {
-          setData(response.data)
-          console.log(response.data)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+    const fetchData = async () => {
+      try{
+        await axios.get('http://localhost:3500/bisection', {headers: config})
+          .then(response => {
+            setData(response.data)
+            console.log(response.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      } catch (err) {
+        console.log(err)
       }
-      getData()
+    }
+    fetchData()
   }, [])
-
 
   const handleSubmit = (e) => {
     e.preventDefault();

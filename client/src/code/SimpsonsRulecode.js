@@ -17,15 +17,22 @@ function SimpsonsRulecode() {
 
   useEffect(() => {
     const config = { 'Authorization': `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InBlcHNpIiwiaWF0IjoxNjUzNTQxOTQzLCJleHAiOjE2ODUwNzc5NDN9.t_ENYPHSnkLj18auCs_2UV9hauWyvMGcMBRAh7-Eqbg` }
-    axios.get('http://localhost:3500/integrate', {headers: config})
-      .then(response => {
-        setData(response.data)
-        console.log(response.data)
-      })
-      .catch(error => {
-        console.log(error)
-      })
-  }, [])
+    const fetchData = async () => {
+      try{
+        await axios.get('http://localhost:3500/integrate', {headers: config})
+          .then(response => {
+            setData(response.data)
+            console.log(response.data)
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      } catch (err) {
+        console.log(err)
+      }
+    }
+    fetchData();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -108,6 +115,7 @@ function SimpsonsRulecode() {
             <TextField
               value={a}
               onChange={(e) => setA(e.target.value)}
+              placeholder="lower bound (a)"
               label="lower bound (a)"
               variant="outlined"
               color="secondary"
@@ -119,11 +127,11 @@ function SimpsonsRulecode() {
             <TextField
               value={b}
               onChange={(e) => setB(e.target.value)}
+              placeholder="upper bound (b)"
               label="upper bound (b)"
               variant="outlined"
               color="secondary"
               fullWidth
-              required 
             />
           </Grid>
           {alignment === "composite" &&
@@ -131,6 +139,7 @@ function SimpsonsRulecode() {
             <TextField
               value={n}
               onChange={(e) => setN(e.target.value)}
+              placeholder="n"
               label="n"
               variant="outlined"
               color="secondary"
